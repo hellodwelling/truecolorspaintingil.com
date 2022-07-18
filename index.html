@@ -51,7 +51,42 @@
 
 
     </style>
-    <script type="text/javascript" defer>
+    <script type="text/javascript">
+        function segmentScript(){
+            var prophoneSegmentId = 'Z6dq7zq7CtZubdSRrh4EHjCsAasGDPiE'
+            var customerPagesSegmentId = '9Ce585PETlETCGamY79KkSoBrcAdcdPc'
+
+            if (window.location.href.includes('prosite.prophone.com')) {
+                segmentId = prophoneSegmentId
+            } else {
+                segmentId = customerPagesSegmentId
+            }
+            console.log('bucksaaaaaa')
+
+            var analytics=window.analytics=window.analytics||[];
+            if(!analytics.initialize)
+            if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");
+            else{
+                    analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];
+                analytics.factory=function(e){
+                    return function(){
+                        var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics
+                    }
+                };
+                for(var e=0;e<analytics.methods.length;e++){
+                    var key=analytics.methods[e];analytics[key]=analytics.factory(key)
+                }
+                analytics.load=function(key,e){var t=document.createElement("script");
+                t.type="text/javascript";t.async=!0;t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";
+                var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._loadOptions=e
+                };
+                analytics._writeKey=segmentId;;
+                analytics.SNIPPET_VERSION="4.15.3";
+                analytics.load(segmentId);
+                analytics.page();
+            };
+        }
+        segmentScript()
                     function send_sms(slug){
                         const sendButton = document.getElementById('sendButton')
                         sendButton.disabled = true
@@ -308,12 +343,19 @@
                     :class="{'hidden': !scrolledFromTop, 'hidden': scrolledFromTop}"
                     class="sm:flex text-white text-sm mb-3 sm:mb-0"
                 >
-                    You’re just a few clicks from going live! Don’t worry - we can still make edits after launching.
+                    
+
+                    James, you’re just a few clicks from going live! Don’t worry - we can still make edits after launching.
+
+                    
                 </div>
             </div>
             <div class="flex flex-row items-center">
                 <a class="flex bg-white px-4 py-2 rounded-md text-orange-600 mr-4 text-sm" href="https://app.prophone.com/checkout?id=5837">
                     Launch my site
+                </a>
+                <a id="contact-us-button" class="flex bg-white px-4 py-2 rounded-md text-orange-600 mr-4 text-sm" href="tel:8573653045">
+                    Contact Us
                 </a>
                 <a class="flex font-bold underline underline-offset-4 text-white text-sm" href="https://www.prophone.com/learn-more?id=5837">
                     Learn more →
@@ -835,7 +877,7 @@
 <script>
     const navBar = document.getElementById('nav-bar')
     const launchBanner = document.getElementById('launch-site-banner')
-
+    const contactUsButton = document.getElementById('contact-us-button')
     function detectMob() {
         if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
             return true
@@ -845,12 +887,18 @@
     }
     const isMobile = detectMob()
 
-    if (window.location.href.includes('prosite.prophone.com')) {
+    if (window.location.href.includes('prosite.prophone.com')
+     || window.location.href.includes('dev.prosite.prophone.com')
+     || window.location.href.includes('stage.prosite.prophone.com')
+     || window.location.href.includes('127.0.0.1:8000')
+     || window.location.href.includes('localhost')) {
         launchBanner.style.display = 'block'
         if (isMobile) {
             navBar.className = "fixed inset-x-0 sm:top-16 z-20 transition-all duration-200"
+            contactUsButton.href = "tel:8573653045"
         } else {
             navBar.className = "fixed inset-x-0 top-0 sm:top-16 z-20 transition-all duration-200"
+            contactUsButton.href = "mailto:support@prophone.com?subject=ProPhone - Sales Inquiry"
         }
     } else {
         launchBanner.style.display = 'none'
@@ -1086,7 +1134,7 @@
                   <div class="text-primary">
                       <h2 class="text-3xl font-extrabold lg:text-4xl">About Us</h2>
                       <p class="mt-6 text-xl">
-                          True Colors Painting &amp; Cleaning LLC is a professional painting and cleaning company servicing Macomb and surrounding areas. The owner and operator, James Fowler, has over 25 years of experience including previous work as an inspector for the city. We offer high-quality services at an affordable price. We are reliable, honest, and always put our customers first.
+                          True Colors Painting &amp; Cleaning LLC is a professional painting and cleaning company servicing Macomb and surrounding areas. The owner and operator, James Fowler, has over 25 years of experience. We offer high-quality services at an affordable price. We are reliable, honest, and always put our customers first.
                       </p>
                   </div>
                   <footer class="mt-6">
@@ -1243,11 +1291,14 @@
 
                             <div aria-hidden="true" class="absolute inset-0 z-10 opacity-75 bg-secondary"></div>
                             
-                            <img
-                                class="object-cover grayscale"
-                    src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/media/47f21202-b087-4a89-91c5-248b2c2e7c20.jpeg" alt="We are a professional Painting company that offers Exterior Painting services. We use high-quality paints and materials to ensure a beautiful, long-lasting finish for your home. Our experienced painters will work diligently to complete your project on time and within budget. for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"
-                                alt=""
-                            />
+                                
+                                    <img
+                                        class="object-cover grayscale"
+                    src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/47f21202-b087-4a89-91c5-248b2c2e7c20.jpeg" alt="We are a professional Painting company that offers Exterior Painting services. We use high-quality paints and materials to ensure a beautiful, long-lasting finish for your home. Our experienced painters will work diligently to complete your project on time and within budget. for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"
+                                        alt=""
+                                    />
+                                
+
                             
                         </a>
                     </li>
@@ -1294,11 +1345,14 @@
 
                             <div aria-hidden="true" class="absolute inset-0 z-10 opacity-75 bg-secondary"></div>
                             
-                            <img
-                                class="object-cover grayscale"
-                    src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/media/4548ce89-607c-4cb8-8ffa-8f4b88c35a57.jpeg" alt="Our Interior Painting service is perfect for homeowners who want to update the look of their home without breaking the bank. We use high-quality paints and finishes to give your home a fresh new look. Plus, our experienced painters will work diligently to ensure that your project is completed on time and within budget. for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"
-                                alt=""
-                            />
+                                
+                                    <img
+                                        class="object-cover grayscale"
+                    src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/4548ce89-607c-4cb8-8ffa-8f4b88c35a57.jpeg" alt="Our Interior Painting service is perfect for homeowners who want to update the look of their home without breaking the bank. We use high-quality paints and finishes to give your home a fresh new look. Plus, our experienced painters will work diligently to ensure that your project is completed on time and within budget. for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"
+                                        alt=""
+                                    />
+                                
+
                             
                         </a>
                     </li>
@@ -1345,11 +1399,14 @@
 
                             <div aria-hidden="true" class="absolute inset-0 z-10 opacity-75 bg-secondary"></div>
                             
-                            <img
-                                class="object-cover grayscale"
-                    src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/media/4fae492a-5422-43ea-9b89-6a8f0f7d73a7.jpeg" alt="Our Kitchen and Cabinet Refinishing service can give your cabinets a brand new look without the cost of replacement! We will refinish your cabinets to match the existing style or we can update them with a new color or design. for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"
-                                alt=""
-                            />
+                                
+                                    <img
+                                        class="object-cover grayscale"
+                    src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/4fae492a-5422-43ea-9b89-6a8f0f7d73a7.jpeg" alt="Our Kitchen and Cabinet Refinishing service can give your cabinets a brand new look without the cost of replacement! We will refinish your cabinets to match the existing style or we can update them with a new color or design. for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"
+                                        alt=""
+                                    />
+                                
+
                             
                         </a>
                     </li>
@@ -1396,11 +1453,14 @@
 
                             <div aria-hidden="true" class="absolute inset-0 z-10 opacity-75 bg-secondary"></div>
                             
-                            <img
-                                class="object-cover grayscale"
-                    src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/media/2892e797-2697-4fac-84dc-63a92ddee09a.jpeg" alt="Our Other Painting Services are a great option for homeowners who want to change the color of their walls but don&#x27;t want to deal with the hassle of painting themselves. We can help you choose a new color and take care of all the painting for you. for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"
-                                alt=""
-                            />
+                                
+                                    <img
+                                        class="object-cover grayscale"
+                    src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/2892e797-2697-4fac-84dc-63a92ddee09a.jpeg" alt="Our Other Painting Services are a great option for homeowners who want to change the color of their walls but don&#x27;t want to deal with the hassle of painting themselves. We can help you choose a new color and take care of all the painting for you. for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"
+                                        alt=""
+                                    />
+                                
+
                             
                         </a>
                     </li>
@@ -1567,7 +1627,7 @@
                     <button @click="activeImage = 0; galleryModalOpen = true" class="block w-full h-full space-y-4 text-left rounded focus:outline-none focus-visible:ring ring-primary ring-offset-2 ring-opacity-75">
                         <div class="aspect-w-3 aspect-h-2">
                             
-                                <img class="object-cover rounded-lg shadow-lg" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/media/265ec54d-f5f8-4b6b-bc81-283a7a6d335c.png" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
+                                <img class="object-cover rounded-lg shadow-lg" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/265ec54d-f5f8-4b6b-bc81-283a7a6d335c.png" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
                             
                         </div>
 
@@ -1584,7 +1644,7 @@
                     <button @click="activeImage = 1; galleryModalOpen = true" class="block w-full h-full space-y-4 text-left rounded focus:outline-none focus-visible:ring ring-primary ring-offset-2 ring-opacity-75">
                         <div class="aspect-w-3 aspect-h-2">
                             
-                                <img class="object-cover rounded-lg shadow-lg" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/media/96d0babb-a91f-4c9e-ac87-8a4b28b30aca.png" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
+                                <img class="object-cover rounded-lg shadow-lg" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/96d0babb-a91f-4c9e-ac87-8a4b28b30aca.png" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
                             
                         </div>
 
@@ -1601,7 +1661,7 @@
                     <button @click="activeImage = 2; galleryModalOpen = true" class="block w-full h-full space-y-4 text-left rounded focus:outline-none focus-visible:ring ring-primary ring-offset-2 ring-opacity-75">
                         <div class="aspect-w-3 aspect-h-2">
                             
-                                <img class="object-cover rounded-lg shadow-lg" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/media/bf6fcc04-f762-4736-be2a-9b08df28211d.png" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
+                                <img class="object-cover rounded-lg shadow-lg" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/bf6fcc04-f762-4736-be2a-9b08df28211d.png" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
                             
                         </div>
 
@@ -1618,7 +1678,7 @@
                     <button @click="activeImage = 3; galleryModalOpen = true" class="block w-full h-full space-y-4 text-left rounded focus:outline-none focus-visible:ring ring-primary ring-offset-2 ring-opacity-75">
                         <div class="aspect-w-3 aspect-h-2">
                             
-                                <img class="object-cover rounded-lg shadow-lg" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/media/9734e213-a4ae-4a3d-83c9-b6cf015a44c4.png" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
+                                <img class="object-cover rounded-lg shadow-lg" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/9734e213-a4ae-4a3d-83c9-b6cf015a44c4.png" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
                             
                         </div>
 
@@ -1635,7 +1695,7 @@
                     <button @click="activeImage = 4; galleryModalOpen = true" class="block w-full h-full space-y-4 text-left rounded focus:outline-none focus-visible:ring ring-primary ring-offset-2 ring-opacity-75">
                         <div class="aspect-w-3 aspect-h-2">
                             
-                                <img class="object-cover rounded-lg shadow-lg" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/media/c35e7e2e-2699-465a-b27d-cf02d22b4a03.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
+                                <img class="object-cover rounded-lg shadow-lg" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/c35e7e2e-2699-465a-b27d-cf02d22b4a03.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
                             
                         </div>
 
@@ -1652,7 +1712,7 @@
                     <button @click="activeImage = 5; galleryModalOpen = true" class="block w-full h-full space-y-4 text-left rounded focus:outline-none focus-visible:ring ring-primary ring-offset-2 ring-opacity-75">
                         <div class="aspect-w-3 aspect-h-2">
                             
-                                <img class="object-cover rounded-lg shadow-lg" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/media/4f3a23bc-1b45-4c9d-a99f-b54dedddc5c3.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
+                                <img class="object-cover rounded-lg shadow-lg" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/4f3a23bc-1b45-4c9d-a99f-b54dedddc5c3.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
                             
                         </div>
 
@@ -1669,7 +1729,7 @@
                     <button @click="activeImage = 6; galleryModalOpen = true" class="block w-full h-full space-y-4 text-left rounded focus:outline-none focus-visible:ring ring-primary ring-offset-2 ring-opacity-75">
                         <div class="aspect-w-3 aspect-h-2">
                             
-                                <img class="object-cover rounded-lg shadow-lg" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/media/9c0216c3-5c23-49c4-b215-2ab9e8956171.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
+                                <img class="object-cover rounded-lg shadow-lg" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/9c0216c3-5c23-49c4-b215-2ab9e8956171.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
                             
                         </div>
 
@@ -1686,7 +1746,7 @@
                     <button @click="activeImage = 7; galleryModalOpen = true" class="block w-full h-full space-y-4 text-left rounded focus:outline-none focus-visible:ring ring-primary ring-offset-2 ring-opacity-75">
                         <div class="aspect-w-3 aspect-h-2">
                             
-                                <img class="object-cover rounded-lg shadow-lg" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/media/3261c96a-171c-4927-9e3f-3a1e99dafdb5.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
+                                <img class="object-cover rounded-lg shadow-lg" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/3261c96a-171c-4927-9e3f-3a1e99dafdb5.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
                             
                         </div>
 
@@ -1703,7 +1763,7 @@
                     <button @click="activeImage = 8; galleryModalOpen = true" class="block w-full h-full space-y-4 text-left rounded focus:outline-none focus-visible:ring ring-primary ring-offset-2 ring-opacity-75">
                         <div class="aspect-w-3 aspect-h-2">
                             
-                                <img class="object-cover rounded-lg shadow-lg" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/media/b94321d1-429f-4993-a457-eed0c71e4ab0.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
+                                <img class="object-cover rounded-lg shadow-lg" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/b94321d1-429f-4993-a457-eed0c71e4ab0.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
                             
                         </div>
 
@@ -1720,7 +1780,7 @@
                     <button @click="activeImage = 9; galleryModalOpen = true" class="block w-full h-full space-y-4 text-left rounded focus:outline-none focus-visible:ring ring-primary ring-offset-2 ring-opacity-75">
                         <div class="aspect-w-3 aspect-h-2">
                             
-                                <img class="object-cover rounded-lg shadow-lg" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/media/1f30b88e-a740-4954-a08e-9e47b8ef847b.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
+                                <img class="object-cover rounded-lg shadow-lg" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/1f30b88e-a740-4954-a08e-9e47b8ef847b.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
                             
                         </div>
 
@@ -1737,7 +1797,7 @@
                     <button @click="activeImage = 10; galleryModalOpen = true" class="block w-full h-full space-y-4 text-left rounded focus:outline-none focus-visible:ring ring-primary ring-offset-2 ring-opacity-75">
                         <div class="aspect-w-3 aspect-h-2">
                             
-                                <img class="object-cover rounded-lg shadow-lg" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/media/dffd52e0-c14f-42fb-8507-830d0ab468cf.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
+                                <img class="object-cover rounded-lg shadow-lg" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/dffd52e0-c14f-42fb-8507-830d0ab468cf.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
                             
                         </div>
 
@@ -1754,7 +1814,7 @@
                     <button @click="activeImage = 11; galleryModalOpen = true" class="block w-full h-full space-y-4 text-left rounded focus:outline-none focus-visible:ring ring-primary ring-offset-2 ring-opacity-75">
                         <div class="aspect-w-3 aspect-h-2">
                             
-                                <img class="object-cover rounded-lg shadow-lg" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/media/5dc3961c-bff0-4162-9306-d48469333172.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
+                                <img class="object-cover rounded-lg shadow-lg" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/5dc3961c-bff0-4162-9306-d48469333172.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
                             
                         </div>
 
@@ -1771,7 +1831,7 @@
                     <button @click="activeImage = 12; galleryModalOpen = true" class="block w-full h-full space-y-4 text-left rounded focus:outline-none focus-visible:ring ring-primary ring-offset-2 ring-opacity-75">
                         <div class="aspect-w-3 aspect-h-2">
                             
-                                <img class="object-cover rounded-lg shadow-lg" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/media/4d8cc273-322a-45fd-bae4-d1bf444d1a93.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
+                                <img class="object-cover rounded-lg shadow-lg" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/4d8cc273-322a-45fd-bae4-d1bf444d1a93.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
                             
                         </div>
 
@@ -1788,7 +1848,7 @@
                     <button @click="activeImage = 13; galleryModalOpen = true" class="block w-full h-full space-y-4 text-left rounded focus:outline-none focus-visible:ring ring-primary ring-offset-2 ring-opacity-75">
                         <div class="aspect-w-3 aspect-h-2">
                             
-                                <img class="object-cover rounded-lg shadow-lg" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/media/86330647-93f6-486e-8b1a-66d352c24d7f.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
+                                <img class="object-cover rounded-lg shadow-lg" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/86330647-93f6-486e-8b1a-66d352c24d7f.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
                             
                         </div>
 
@@ -1805,7 +1865,7 @@
                     <button @click="activeImage = 14; galleryModalOpen = true" class="block w-full h-full space-y-4 text-left rounded focus:outline-none focus-visible:ring ring-primary ring-offset-2 ring-opacity-75">
                         <div class="aspect-w-3 aspect-h-2">
                             
-                                <img class="object-cover rounded-lg shadow-lg" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/media/6cfe5496-9ac4-41e0-8b7a-57fe98776355.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
+                                <img class="object-cover rounded-lg shadow-lg" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/6cfe5496-9ac4-41e0-8b7a-57fe98776355.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
                             
                         </div>
 
@@ -1822,7 +1882,7 @@
                     <button @click="activeImage = 15; galleryModalOpen = true" class="block w-full h-full space-y-4 text-left rounded focus:outline-none focus-visible:ring ring-primary ring-offset-2 ring-opacity-75">
                         <div class="aspect-w-3 aspect-h-2">
                             
-                                <img class="object-cover rounded-lg shadow-lg" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/media/54463381-3415-4bcf-9456-fe7841ae775c.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
+                                <img class="object-cover rounded-lg shadow-lg" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/54463381-3415-4bcf-9456-fe7841ae775c.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
                             
                         </div>
 
@@ -1839,7 +1899,7 @@
                     <button @click="activeImage = 16; galleryModalOpen = true" class="block w-full h-full space-y-4 text-left rounded focus:outline-none focus-visible:ring ring-primary ring-offset-2 ring-opacity-75">
                         <div class="aspect-w-3 aspect-h-2">
                             
-                                <img class="object-cover rounded-lg shadow-lg" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/media/ac5c3a03-c2e3-4716-9e90-09e8a9d78a5f.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
+                                <img class="object-cover rounded-lg shadow-lg" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/ac5c3a03-c2e3-4716-9e90-09e8a9d78a5f.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
                             
                         </div>
 
@@ -1856,7 +1916,7 @@
                     <button @click="activeImage = 17; galleryModalOpen = true" class="block w-full h-full space-y-4 text-left rounded focus:outline-none focus-visible:ring ring-primary ring-offset-2 ring-opacity-75">
                         <div class="aspect-w-3 aspect-h-2">
                             
-                                <img class="object-cover rounded-lg shadow-lg" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/media/68d19dc5-bcca-499f-991d-0b6f93f482cd.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
+                                <img class="object-cover rounded-lg shadow-lg" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/68d19dc5-bcca-499f-991d-0b6f93f482cd.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
                             
                         </div>
 
@@ -1873,7 +1933,7 @@
                     <button @click="activeImage = 18; galleryModalOpen = true" class="block w-full h-full space-y-4 text-left rounded focus:outline-none focus-visible:ring ring-primary ring-offset-2 ring-opacity-75">
                         <div class="aspect-w-3 aspect-h-2">
                             
-                                <img class="object-cover rounded-lg shadow-lg" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/media/ac8cdfc3-12bb-4523-947d-34da265748fe.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
+                                <img class="object-cover rounded-lg shadow-lg" src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/media/ac8cdfc3-12bb-4523-947d-34da265748fe.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
                             
                         </div>
 
@@ -1930,133 +1990,133 @@
                                 
                                     <li class="flex flex-col" x-show="activeImage === 0">
                                             
-                                            <img class="mt-2 lg:h-[481px] h-[200px] sm:h-[300px] self-center rounded-md object-cover"  src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/684x480/media/265ec54d-f5f8-4b6b-bc81-283a7a6d335c.png" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
+                                            <img class="mt-2 lg:h-[481px] h-[200px] sm:h-[300px] self-center rounded-md object-cover"  src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/684x480/media/265ec54d-f5f8-4b6b-bc81-283a7a6d335c.png" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
                                             <p lorem="1" class="mt-3 text-gray-500"></p>
                                         
                                     </li>
                                 
                                     <li class="flex flex-col" x-show="activeImage === 1">
                                             
-                                            <img class="mt-2 lg:h-[481px] h-[200px] sm:h-[300px] self-center rounded-md object-cover"  src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/684x480/media/96d0babb-a91f-4c9e-ac87-8a4b28b30aca.png" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
+                                            <img class="mt-2 lg:h-[481px] h-[200px] sm:h-[300px] self-center rounded-md object-cover"  src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/684x480/media/96d0babb-a91f-4c9e-ac87-8a4b28b30aca.png" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
                                             <p lorem="1" class="mt-3 text-gray-500"></p>
                                         
                                     </li>
                                 
                                     <li class="flex flex-col" x-show="activeImage === 2">
                                             
-                                            <img class="mt-2 lg:h-[481px] h-[200px] sm:h-[300px] self-center rounded-md object-cover"  src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/684x480/media/bf6fcc04-f762-4736-be2a-9b08df28211d.png" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
+                                            <img class="mt-2 lg:h-[481px] h-[200px] sm:h-[300px] self-center rounded-md object-cover"  src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/684x480/media/bf6fcc04-f762-4736-be2a-9b08df28211d.png" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
                                             <p lorem="1" class="mt-3 text-gray-500"></p>
                                         
                                     </li>
                                 
                                     <li class="flex flex-col" x-show="activeImage === 3">
                                             
-                                            <img class="mt-2 lg:h-[481px] h-[200px] sm:h-[300px] self-center rounded-md object-cover"  src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/684x480/media/9734e213-a4ae-4a3d-83c9-b6cf015a44c4.png" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
+                                            <img class="mt-2 lg:h-[481px] h-[200px] sm:h-[300px] self-center rounded-md object-cover"  src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/684x480/media/9734e213-a4ae-4a3d-83c9-b6cf015a44c4.png" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
                                             <p lorem="1" class="mt-3 text-gray-500"></p>
                                         
                                     </li>
                                 
                                     <li class="flex flex-col" x-show="activeImage === 4">
                                             
-                                            <img class="mt-2 lg:h-[481px] h-[200px] sm:h-[300px] self-center rounded-md object-cover"  src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/684x480/media/c35e7e2e-2699-465a-b27d-cf02d22b4a03.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
+                                            <img class="mt-2 lg:h-[481px] h-[200px] sm:h-[300px] self-center rounded-md object-cover"  src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/684x480/media/c35e7e2e-2699-465a-b27d-cf02d22b4a03.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
                                             <p lorem="1" class="mt-3 text-gray-500"></p>
                                         
                                     </li>
                                 
                                     <li class="flex flex-col" x-show="activeImage === 5">
                                             
-                                            <img class="mt-2 lg:h-[481px] h-[200px] sm:h-[300px] self-center rounded-md object-cover"  src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/684x480/media/4f3a23bc-1b45-4c9d-a99f-b54dedddc5c3.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
+                                            <img class="mt-2 lg:h-[481px] h-[200px] sm:h-[300px] self-center rounded-md object-cover"  src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/684x480/media/4f3a23bc-1b45-4c9d-a99f-b54dedddc5c3.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
                                             <p lorem="1" class="mt-3 text-gray-500"></p>
                                         
                                     </li>
                                 
                                     <li class="flex flex-col" x-show="activeImage === 6">
                                             
-                                            <img class="mt-2 lg:h-[481px] h-[200px] sm:h-[300px] self-center rounded-md object-cover"  src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/684x480/media/9c0216c3-5c23-49c4-b215-2ab9e8956171.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
+                                            <img class="mt-2 lg:h-[481px] h-[200px] sm:h-[300px] self-center rounded-md object-cover"  src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/684x480/media/9c0216c3-5c23-49c4-b215-2ab9e8956171.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
                                             <p lorem="1" class="mt-3 text-gray-500"></p>
                                         
                                     </li>
                                 
                                     <li class="flex flex-col" x-show="activeImage === 7">
                                             
-                                            <img class="mt-2 lg:h-[481px] h-[200px] sm:h-[300px] self-center rounded-md object-cover"  src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/684x480/media/3261c96a-171c-4927-9e3f-3a1e99dafdb5.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
+                                            <img class="mt-2 lg:h-[481px] h-[200px] sm:h-[300px] self-center rounded-md object-cover"  src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/684x480/media/3261c96a-171c-4927-9e3f-3a1e99dafdb5.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
                                             <p lorem="1" class="mt-3 text-gray-500"></p>
                                         
                                     </li>
                                 
                                     <li class="flex flex-col" x-show="activeImage === 8">
                                             
-                                            <img class="mt-2 lg:h-[481px] h-[200px] sm:h-[300px] self-center rounded-md object-cover"  src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/684x480/media/b94321d1-429f-4993-a457-eed0c71e4ab0.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
+                                            <img class="mt-2 lg:h-[481px] h-[200px] sm:h-[300px] self-center rounded-md object-cover"  src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/684x480/media/b94321d1-429f-4993-a457-eed0c71e4ab0.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
                                             <p lorem="1" class="mt-3 text-gray-500"></p>
                                         
                                     </li>
                                 
                                     <li class="flex flex-col" x-show="activeImage === 9">
                                             
-                                            <img class="mt-2 lg:h-[481px] h-[200px] sm:h-[300px] self-center rounded-md object-cover"  src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/684x480/media/1f30b88e-a740-4954-a08e-9e47b8ef847b.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
+                                            <img class="mt-2 lg:h-[481px] h-[200px] sm:h-[300px] self-center rounded-md object-cover"  src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/684x480/media/1f30b88e-a740-4954-a08e-9e47b8ef847b.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
                                             <p lorem="1" class="mt-3 text-gray-500"></p>
                                         
                                     </li>
                                 
                                     <li class="flex flex-col" x-show="activeImage === 10">
                                             
-                                            <img class="mt-2 lg:h-[481px] h-[200px] sm:h-[300px] self-center rounded-md object-cover"  src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/684x480/media/dffd52e0-c14f-42fb-8507-830d0ab468cf.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
+                                            <img class="mt-2 lg:h-[481px] h-[200px] sm:h-[300px] self-center rounded-md object-cover"  src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/684x480/media/dffd52e0-c14f-42fb-8507-830d0ab468cf.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
                                             <p lorem="1" class="mt-3 text-gray-500"></p>
                                         
                                     </li>
                                 
                                     <li class="flex flex-col" x-show="activeImage === 11">
                                             
-                                            <img class="mt-2 lg:h-[481px] h-[200px] sm:h-[300px] self-center rounded-md object-cover"  src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/684x480/media/5dc3961c-bff0-4162-9306-d48469333172.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
+                                            <img class="mt-2 lg:h-[481px] h-[200px] sm:h-[300px] self-center rounded-md object-cover"  src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/684x480/media/5dc3961c-bff0-4162-9306-d48469333172.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
                                             <p lorem="1" class="mt-3 text-gray-500"></p>
                                         
                                     </li>
                                 
                                     <li class="flex flex-col" x-show="activeImage === 12">
                                             
-                                            <img class="mt-2 lg:h-[481px] h-[200px] sm:h-[300px] self-center rounded-md object-cover"  src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/684x480/media/4d8cc273-322a-45fd-bae4-d1bf444d1a93.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
+                                            <img class="mt-2 lg:h-[481px] h-[200px] sm:h-[300px] self-center rounded-md object-cover"  src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/684x480/media/4d8cc273-322a-45fd-bae4-d1bf444d1a93.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
                                             <p lorem="1" class="mt-3 text-gray-500"></p>
                                         
                                     </li>
                                 
                                     <li class="flex flex-col" x-show="activeImage === 13">
                                             
-                                            <img class="mt-2 lg:h-[481px] h-[200px] sm:h-[300px] self-center rounded-md object-cover"  src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/684x480/media/86330647-93f6-486e-8b1a-66d352c24d7f.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
+                                            <img class="mt-2 lg:h-[481px] h-[200px] sm:h-[300px] self-center rounded-md object-cover"  src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/684x480/media/86330647-93f6-486e-8b1a-66d352c24d7f.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
                                             <p lorem="1" class="mt-3 text-gray-500"></p>
                                         
                                     </li>
                                 
                                     <li class="flex flex-col" x-show="activeImage === 14">
                                             
-                                            <img class="mt-2 lg:h-[481px] h-[200px] sm:h-[300px] self-center rounded-md object-cover"  src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/684x480/media/6cfe5496-9ac4-41e0-8b7a-57fe98776355.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
+                                            <img class="mt-2 lg:h-[481px] h-[200px] sm:h-[300px] self-center rounded-md object-cover"  src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/684x480/media/6cfe5496-9ac4-41e0-8b7a-57fe98776355.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
                                             <p lorem="1" class="mt-3 text-gray-500"></p>
                                         
                                     </li>
                                 
                                     <li class="flex flex-col" x-show="activeImage === 15">
                                             
-                                            <img class="mt-2 lg:h-[481px] h-[200px] sm:h-[300px] self-center rounded-md object-cover"  src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/684x480/media/54463381-3415-4bcf-9456-fe7841ae775c.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
+                                            <img class="mt-2 lg:h-[481px] h-[200px] sm:h-[300px] self-center rounded-md object-cover"  src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/684x480/media/54463381-3415-4bcf-9456-fe7841ae775c.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
                                             <p lorem="1" class="mt-3 text-gray-500"></p>
                                         
                                     </li>
                                 
                                     <li class="flex flex-col" x-show="activeImage === 16">
                                             
-                                            <img class="mt-2 lg:h-[481px] h-[200px] sm:h-[300px] self-center rounded-md object-cover"  src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/684x480/media/ac5c3a03-c2e3-4716-9e90-09e8a9d78a5f.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
+                                            <img class="mt-2 lg:h-[481px] h-[200px] sm:h-[300px] self-center rounded-md object-cover"  src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/684x480/media/ac5c3a03-c2e3-4716-9e90-09e8a9d78a5f.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
                                             <p lorem="1" class="mt-3 text-gray-500"></p>
                                         
                                     </li>
                                 
                                     <li class="flex flex-col" x-show="activeImage === 17">
                                             
-                                            <img class="mt-2 lg:h-[481px] h-[200px] sm:h-[300px] self-center rounded-md object-cover"  src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/684x480/media/68d19dc5-bcca-499f-991d-0b6f93f482cd.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
+                                            <img class="mt-2 lg:h-[481px] h-[200px] sm:h-[300px] self-center rounded-md object-cover"  src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/684x480/media/68d19dc5-bcca-499f-991d-0b6f93f482cd.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
                                             <p lorem="1" class="mt-3 text-gray-500"></p>
                                         
                                     </li>
                                 
                                     <li class="flex flex-col" x-show="activeImage === 18">
                                             
-                                            <img class="mt-2 lg:h-[481px] h-[200px] sm:h-[300px] self-center rounded-md object-cover"  src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/684x480/media/ac8cdfc3-12bb-4523-947d-34da265748fe.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
+                                            <img class="mt-2 lg:h-[481px] h-[200px] sm:h-[300px] self-center rounded-md object-cover"  src="https://d3p2r6ofnvoe67.cloudfront.net/fit-in/filters:strip_exif()/filters:format(webp)/684x480/media/ac8cdfc3-12bb-4523-947d-34da265748fe.jpeg" alt="Exterior Painting for True Colors painting &amp; Cleaning LLC in Peoria, IL" loading="lazy"/>
                                             <p lorem="1" class="mt-3 text-gray-500"></p>
                                         
                                     </li>
@@ -2185,11 +2245,26 @@
                                 <footer class="flex items-center justify-between mt-8 space-x-4">
                                     <div>
                                         <span class="block font-medium text-primary">Reagan Owen</span>
-                                        <span class="block font-medium">Peoria, IL</span>
+                                        <span class="block font-medium">Macomb, IL</span>
                                     </div>
 
                                     <div class="flex-shrink-0">
-                                        <span class="sr-only">None</span>
+                                        <span class="sr-only">Facebook</span>
+                                        
+                                        <svg
+                                            aria-hidden="true"
+                                            class="text-blue-900 transition-transform w-7 h-7"
+                                            viewBox="0 0 30 30"
+                                            fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                fill-rule="evenodd"
+                                                clip-rule="evenodd"
+                                                d="M30 15c0-8.285-6.715-15-15-15S0 6.715 0 15c0 7.486 5.486 13.692 12.657 14.817v-10.48h-3.81V15h3.81v-3.305c0-3.759 2.238-5.835 5.666-5.835 1.64 0 3.357.293 3.357.293v3.69h-1.89c-1.865 0-2.445 1.156-2.445 2.343V15h4.159l-.665 4.335h-3.494v10.482C24.514 28.692 30 22.487 30 15Z"
+                                                fill="currentColor"
+                                            />
+                                        </svg>
                                         
                                     
                                     </div>
@@ -2267,11 +2342,26 @@
                                 <footer class="flex items-center justify-between mt-8 space-x-4">
                                     <div>
                                         <span class="block font-medium text-primary">James Valdez</span>
-                                        <span class="block font-medium">Peoria, IL</span>
+                                        <span class="block font-medium">Macomb, IL</span>
                                     </div>
 
                                     <div class="flex-shrink-0">
-                                        <span class="sr-only">None</span>
+                                        <span class="sr-only">Facebook</span>
+                                        
+                                        <svg
+                                            aria-hidden="true"
+                                            class="text-blue-900 transition-transform w-7 h-7"
+                                            viewBox="0 0 30 30"
+                                            fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                fill-rule="evenodd"
+                                                clip-rule="evenodd"
+                                                d="M30 15c0-8.285-6.715-15-15-15S0 6.715 0 15c0 7.486 5.486 13.692 12.657 14.817v-10.48h-3.81V15h3.81v-3.305c0-3.759 2.238-5.835 5.666-5.835 1.64 0 3.357.293 3.357.293v3.69h-1.89c-1.865 0-2.445 1.156-2.445 2.343V15h4.159l-.665 4.335h-3.494v10.482C24.514 28.692 30 22.487 30 15Z"
+                                                fill="currentColor"
+                                            />
+                                        </svg>
                                         
                                     
                                     </div>
@@ -2349,11 +2439,26 @@
                                 <footer class="flex items-center justify-between mt-8 space-x-4">
                                     <div>
                                         <span class="block font-medium text-primary">Aldo Boone</span>
-                                        <span class="block font-medium">Peoria, IL</span>
+                                        <span class="block font-medium">Macomb, IL</span>
                                     </div>
 
                                     <div class="flex-shrink-0">
-                                        <span class="sr-only">None</span>
+                                        <span class="sr-only">Facebook</span>
+                                        
+                                        <svg
+                                            aria-hidden="true"
+                                            class="text-blue-900 transition-transform w-7 h-7"
+                                            viewBox="0 0 30 30"
+                                            fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                fill-rule="evenodd"
+                                                clip-rule="evenodd"
+                                                d="M30 15c0-8.285-6.715-15-15-15S0 6.715 0 15c0 7.486 5.486 13.692 12.657 14.817v-10.48h-3.81V15h3.81v-3.305c0-3.759 2.238-5.835 5.666-5.835 1.64 0 3.357.293 3.357.293v3.69h-1.89c-1.865 0-2.445 1.156-2.445 2.343V15h4.159l-.665 4.335h-3.494v10.482C24.514 28.692 30 22.487 30 15Z"
+                                                fill="currentColor"
+                                            />
+                                        </svg>
                                         
                                     
                                     </div>
@@ -2391,7 +2496,7 @@
                                 type="button"
                                 @click="expanded = !expanded"
                                 class="flex items-start justify-between w-full text-left text-white rounded  focus:outline-none focus-visible:ring-2 ring-white"
-                                aria-controls="82625"
+                                aria-controls="95340"
                                 :aria-expanded="expanded"
                             >
                             <span class="font-medium text-white">What&#x27;s the best way to reach you?</span>
@@ -2410,7 +2515,7 @@
                                 </span>
                             </button>
                         </dt>
-                        <dd x-show="expanded" x-cloak x-collapse class="pr-12" id="82625">
+                        <dd x-show="expanded" x-cloak x-collapse class="pr-12" id="95340">
                             <div aria-hidden="true" class="invisible h-2"></div>
                             <p class="mt-2 text-base text-gray-100">Give us a call or send us a text at (309) 255-8290. Thanks!</p>
                         </dd>
@@ -2422,7 +2527,7 @@
                                 type="button"
                                 @click="expanded = !expanded"
                                 class="flex items-start justify-between w-full text-left text-white rounded  focus:outline-none focus-visible:ring-2 ring-white"
-                                aria-controls="82626"
+                                aria-controls="95341"
                                 :aria-expanded="expanded"
                             >
                             <span class="font-medium text-white">Do you provide free estimates?</span>
@@ -2441,7 +2546,7 @@
                                 </span>
                             </button>
                         </dt>
-                        <dd x-show="expanded" x-cloak x-collapse class="pr-12" id="82626">
+                        <dd x-show="expanded" x-cloak x-collapse class="pr-12" id="95341">
                             <div aria-hidden="true" class="invisible h-2"></div>
                             <p class="mt-2 text-base text-gray-100">Yes, we&#x27;ll always estimate the job for free. Just give us a call to get started.</p>
                         </dd>
@@ -2453,7 +2558,7 @@
                                 type="button"
                                 @click="expanded = !expanded"
                                 class="flex items-start justify-between w-full text-left text-white rounded  focus:outline-none focus-visible:ring-2 ring-white"
-                                aria-controls="82627"
+                                aria-controls="95342"
                                 :aria-expanded="expanded"
                             >
                             <span class="font-medium text-white">How are you different?</span>
@@ -2472,7 +2577,7 @@
                                 </span>
                             </button>
                         </dt>
-                        <dd x-show="expanded" x-cloak x-collapse class="pr-12" id="82627">
+                        <dd x-show="expanded" x-cloak x-collapse class="pr-12" id="95342">
                             <div aria-hidden="true" class="invisible h-2"></div>
                             <p class="mt-2 text-base text-gray-100">We&#x27;re a customer-first company that will do whatever it takes to make sure the job is well done.</p>
                         </dd>
@@ -2634,6 +2739,8 @@ observer.observe(target)
         </div>
     </div>
 </section>
+
+
 
 <footer class="bg-primary" aria-labelledby="footer-heading">
   <h2 id="footer-heading" class="sr-only">Footer</h2>
@@ -2830,26 +2937,12 @@ observer.observe(target)
               </div>
           </div>
       </div>
-      <div class="pt-8 mt-12 text-center border-t-2 border-primary-darker">
-          <p class="inline-flex items-center text-base text-gray-100 xl:text-center">
-              Built with ♥ from
-              <a href="https://www.prophone.com" class="inline-block p-1 -m-1 ml-0.5 rounded focus:outline-none focus:ring-2 ring-white ring-opacity-75">
-                  <span class="sr-only">ProPhone</span>
-                  <svg aria-hidden="true" width="95" height="20" viewBox="0 0 95 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <g clip-path="url(#clip0_2081_3309)">
-                          <path d="M0.166504 4.11491C0.166504 3.88479 0.349686 3.69824 0.575652 3.69824H8.41749C8.70492 3.69824 8.90279 3.99213 8.79912 4.26515L2.9271 19.7339C2.86615 19.8944 2.71452 20.0003 2.54548 20.0003H0.575652C0.349686 20.0003 0.166504 19.8138 0.166504 19.5837V4.11491Z" fill="#F3F4F6"/>
-                          <path d="M15.5607 15.8854C15.5607 16.1155 15.3775 16.3021 15.1515 16.3021H7.3097C7.02227 16.3021 6.8244 16.0082 6.92806 15.7352L12.8001 0.266426C12.861 0.105862 13.0127 0 13.1817 0H15.1515C15.3775 0 15.5607 0.186548 15.5607 0.416667V15.8854Z" fill="#F3F4F6"/>
-                          <path d="M23.2834 15.5732H25.2474V11.7139H27.0118C29.1598 11.7139 30.6941 10.3076 30.6941 8.27637C30.6941 6.24512 29.1598 4.82324 27.0118 4.82324H23.2834V15.5732ZM25.2474 6.44824H26.7356C27.871 6.44824 28.6689 7.18262 28.6689 8.27637C28.6689 9.35449 27.871 10.0889 26.7356 10.0889H25.2474V6.44824ZM32.6332 15.5732H34.5971V10.3545C35.1034 9.69824 35.7938 9.33887 36.4382 9.33887C36.6684 9.33887 36.9139 9.37012 37.1287 9.43262V7.65137C36.9139 7.58887 36.6991 7.57324 36.4843 7.57324C35.8245 7.57324 35.1494 7.91699 34.5971 8.54199V7.76074H32.6332V15.5732ZM38.142 11.667C38.142 14.0576 39.7837 15.7607 42.1005 15.7607C44.4173 15.7607 46.0437 14.0576 46.0437 11.667C46.0437 9.26074 44.4173 7.57324 42.1005 7.57324C39.7837 7.57324 38.142 9.26074 38.142 11.667ZM40.152 11.667C40.152 10.2295 40.9498 9.24512 42.1005 9.24512C43.2359 9.24512 44.0338 10.2295 44.0338 11.667C44.0338 13.1045 43.2359 14.0889 42.1005 14.0889C40.9498 14.0889 40.152 13.1045 40.152 11.667Z" fill="#F3F4F6"/>
-                          <path d="M48.2825 15.5733H50.2464V11.7139H52.0108C54.1588 11.7139 55.6931 10.3076 55.6931 8.27637C55.6931 6.24512 54.1588 4.82324 52.0108 4.82324H48.2825V15.5733ZM50.2464 6.44824H51.7346C52.87 6.44824 53.6678 7.18262 53.6678 8.27637C53.6678 9.3545 52.87 10.0889 51.7346 10.0889H50.2464V6.44824ZM57.632 15.5733H59.5959V10.1514C60.1022 9.6045 60.6699 9.32325 61.2376 9.32325C62.0354 9.32325 62.5878 9.917 62.5878 10.7451V15.5733H64.567V10.3857C64.567 8.7295 63.4316 7.57324 61.836 7.57324C61.0535 7.57324 60.2863 7.87012 59.5959 8.43262V4.33887H57.632V15.5733ZM66.4225 11.667C66.4225 14.0576 68.0642 15.7608 70.381 15.7608C72.6978 15.7608 74.3242 14.0576 74.3242 11.667C74.3242 9.26075 72.6978 7.57324 70.381 7.57324C68.0642 7.57324 66.4225 9.26075 66.4225 11.667ZM68.4324 11.667C68.4324 10.2295 69.2303 9.24512 70.381 9.24512C71.5164 9.24512 72.3142 10.2295 72.3142 11.667C72.3142 13.1045 71.5164 14.0889 70.381 14.0889C69.2303 14.0889 68.4324 13.1045 68.4324 11.667ZM76.2559 15.5733H78.2198V10.1514C78.7261 9.6045 79.2938 9.32325 79.8615 9.32325C80.6593 9.32325 81.2117 9.917 81.2117 10.7451V15.5733H83.1909V10.3857C83.1909 8.7295 82.0555 7.57324 80.4599 7.57324C79.6774 7.57324 78.9102 7.87012 78.2198 8.43262V7.76074H76.2559V15.5733ZM85.0464 11.6045C85.0464 14.042 86.6728 15.7608 88.9896 15.7608C89.8488 15.7608 90.7233 15.5576 91.5979 15.1514V13.4795C90.8 13.9482 90.0175 14.2139 89.3118 14.2139C88.023 14.2139 87.1024 13.4014 86.9796 12.2139H92.1809C92.2116 11.9482 92.2116 11.6982 92.2116 11.4795C92.2116 9.18262 90.8461 7.57324 88.8361 7.57324C86.6421 7.57324 85.0464 9.24512 85.0464 11.6045ZM86.9796 10.917C87.0717 9.83887 87.8081 9.12012 88.7594 9.12012C89.634 9.12012 90.263 9.8545 90.3244 10.917H86.9796Z" fill="#F3F4F6"/>
-                      </g>
-                      <defs>
-                          <clipPath id="clip0_2081_3309">
-                              <rect width="94.6667" height="20" fill="white" transform="translate(0.166504)"/>
-                          </clipPath>
-                      </defs>
-                  </svg>
-              </a>
-          </p>
+      <div class="pt-10 mt-12 text-center border-t-2 border-primary-darker">
+        <div>
+            <a href="https://www.prophone.com" target="_blank">
+                <img class="w-56 m-auto" src="/staticfiles/landing_page_gen/built-with-love.png" />
+            </a>
+        </div>
       </div>
   </div>
 </footer>
@@ -2983,46 +3076,46 @@ observer.observe(target)
                                         
                                         <div class="flex items-center">
                                             <input
-                                                    id="contact-service-245733"
-                                                    name="245733"
+                                                    id="contact-service-270430"
+                                                    name="270430"
                                                     type="checkbox"
                                                     class="w-4 h-4 border-gray-300 rounded text-primary focus:ring-primary"
                                                     value="Exterior Painting"
                                             />
-                                            <label for="contact-label-service-245733" class="ml-3 text-sm font-medium text-gray-700">Exterior Painting</label>
+                                            <label for="contact-label-service-270430" class="ml-3 text-sm font-medium text-gray-700">Exterior Painting</label>
                                         </div>
                                         
                                         <div class="flex items-center">
                                             <input
-                                                    id="contact-service-245734"
-                                                    name="245734"
+                                                    id="contact-service-270431"
+                                                    name="270431"
                                                     type="checkbox"
                                                     class="w-4 h-4 border-gray-300 rounded text-primary focus:ring-primary"
                                                     value="Interior Painting"
                                             />
-                                            <label for="contact-label-service-245734" class="ml-3 text-sm font-medium text-gray-700">Interior Painting</label>
+                                            <label for="contact-label-service-270431" class="ml-3 text-sm font-medium text-gray-700">Interior Painting</label>
                                         </div>
                                         
                                         <div class="flex items-center">
                                             <input
-                                                    id="contact-service-245735"
-                                                    name="245735"
+                                                    id="contact-service-270432"
+                                                    name="270432"
                                                     type="checkbox"
                                                     class="w-4 h-4 border-gray-300 rounded text-primary focus:ring-primary"
                                                     value="Kitchen and Cabinet Refinishing"
                                             />
-                                            <label for="contact-label-service-245735" class="ml-3 text-sm font-medium text-gray-700">Kitchen and Cabinet Refinishing</label>
+                                            <label for="contact-label-service-270432" class="ml-3 text-sm font-medium text-gray-700">Kitchen and Cabinet Refinishing</label>
                                         </div>
                                         
                                         <div class="flex items-center">
                                             <input
-                                                    id="contact-service-245736"
-                                                    name="245736"
+                                                    id="contact-service-270433"
+                                                    name="270433"
                                                     type="checkbox"
                                                     class="w-4 h-4 border-gray-300 rounded text-primary focus:ring-primary"
                                                     value="Other Painting Services"
                                             />
-                                            <label for="contact-label-service-245736" class="ml-3 text-sm font-medium text-gray-700">Other Painting Services</label>
+                                            <label for="contact-label-service-270433" class="ml-3 text-sm font-medium text-gray-700">Other Painting Services</label>
                                         </div>
                                         
                                     </div>
@@ -3051,46 +3144,46 @@ observer.observe(target)
                                         
                                         <div class="flex items-center">
                                             <input
-                                                    id="contact-service-245733"
-                                                    name="245733"
+                                                    id="contact-service-270430"
+                                                    name="270430"
                                                     type="checkbox"
                                                     class="w-4 h-4 border-gray-300 rounded text-primary focus:ring-primary"
                                                     value="Exterior Painting"
                                             />
-                                            <label for="contact-label-service-245733" class="ml-3 text-sm font-medium text-gray-700">Exterior Painting</label>
+                                            <label for="contact-label-service-270430" class="ml-3 text-sm font-medium text-gray-700">Exterior Painting</label>
                                         </div>
                                         
                                         <div class="flex items-center">
                                             <input
-                                                    id="contact-service-245734"
-                                                    name="245734"
+                                                    id="contact-service-270431"
+                                                    name="270431"
                                                     type="checkbox"
                                                     class="w-4 h-4 border-gray-300 rounded text-primary focus:ring-primary"
                                                     value="Interior Painting"
                                             />
-                                            <label for="contact-label-service-245734" class="ml-3 text-sm font-medium text-gray-700">Interior Painting</label>
+                                            <label for="contact-label-service-270431" class="ml-3 text-sm font-medium text-gray-700">Interior Painting</label>
                                         </div>
                                         
                                         <div class="flex items-center">
                                             <input
-                                                    id="contact-service-245735"
-                                                    name="245735"
+                                                    id="contact-service-270432"
+                                                    name="270432"
                                                     type="checkbox"
                                                     class="w-4 h-4 border-gray-300 rounded text-primary focus:ring-primary"
                                                     value="Kitchen and Cabinet Refinishing"
                                             />
-                                            <label for="contact-label-service-245735" class="ml-3 text-sm font-medium text-gray-700">Kitchen and Cabinet Refinishing</label>
+                                            <label for="contact-label-service-270432" class="ml-3 text-sm font-medium text-gray-700">Kitchen and Cabinet Refinishing</label>
                                         </div>
                                         
                                         <div class="flex items-center">
                                             <input
-                                                    id="contact-service-245736"
-                                                    name="245736"
+                                                    id="contact-service-270433"
+                                                    name="270433"
                                                     type="checkbox"
                                                     class="w-4 h-4 border-gray-300 rounded text-primary focus:ring-primary"
                                                     value="Other Painting Services"
                                             />
-                                            <label for="contact-label-service-245736" class="ml-3 text-sm font-medium text-gray-700">Other Painting Services</label>
+                                            <label for="contact-label-service-270433" class="ml-3 text-sm font-medium text-gray-700">Other Painting Services</label>
                                         </div>
                                         
                                     </div>
